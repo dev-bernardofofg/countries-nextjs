@@ -1,21 +1,14 @@
-'use client'
+import { fetchCountrys } from "./_actions/fetch-countrys";
 
-import { useQuery } from "@tanstack/react-query";
-import BaseCard from "./_components/base-card";
-import { fetchGetAllCountrys } from "./_services/get-all-countrys";
-
-export default function Home() {
-	const { data } = useQuery({
-		queryKey: ['countrys'],
-		queryFn: () => fetchGetAllCountrys()
-	})
-	return (
-		<section className="max-w-7xl mx-auto w-full pt-24">
-			<div className="grid grid-cols-4 gap-8">
-				{data?.map((country) => (
-					<BaseCard country_flag={country.flags.svg} title={country.name.common} key={country.name.common} />
-				))}
-			</div>
-		</section>
-	);
+export default async function Home() {
+  const countrys = await fetchCountrys();
+  return (
+    <section className="mt-16 max-w-7xl mx-auto overflow-auto h-full">
+      <ul className="grid grid-cols-5 gap-4">
+        {countrys.map((country) => (
+          <li key={country.name.common}>{country.name.common}</li>
+        ))}
+      </ul>
+    </section>
+  );
 }
