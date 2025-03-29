@@ -1,4 +1,4 @@
-import Image from "next/image"
+import Image from "next/image";
 
 export const Header = () => {
   return (
@@ -9,12 +9,10 @@ export const Header = () => {
             <Image src="/icons/world.svg" alt="icon-world" fill />
           </div>
           <div>
-            <span className="font-bold text-2xl">
-              Países do Mundo
-            </span>
+            <span className="font-extrabold text-2xl">Países do Mundo</span>
           </div>
         </div>
       </div>
     </header>
-  )
-}
+  );
+};

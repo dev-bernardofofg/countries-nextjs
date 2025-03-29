@@ -1,14 +1,19 @@
 import { fetchCountrys } from "./_actions/fetch-countrys";
+import { BaseCard } from "./_components/card/base-card";
 
 export default async function Home() {
   const countrys = await fetchCountrys();
   return (
-    <section className="mt-16 max-w-7xl mx-auto overflow-auto h-full">
-      <ul className="grid grid-cols-5 gap-4">
+    <section className="py-16 max-w-7xl mx-auto h-full">
+      <div className="grid grid-cols-5 gap-5">
         {countrys.map((country) => (
-          <li key={country.name.common}>{country.name.common}</li>
+          <BaseCard
+            key={country.name.common}
+            country_flag={country.flags.svg}
+            title={country.name.common}
+          />
         ))}
-      </ul>
+      </div>
     </section>
   );
 }
