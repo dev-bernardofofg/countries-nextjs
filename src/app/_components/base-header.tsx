@@ -9,7 +9,9 @@ export const Header = () => {
             <Image src="/icons/world.svg" alt="icon-world" fill />
           </div>
           <div>
-            <span className="font-extrabold text-2xl">Países do Mundo</span>
+            <span className="font-extrabold text-2xl">
+              Countries of the World
+            </span>
           </div>
         </div>
       </div>

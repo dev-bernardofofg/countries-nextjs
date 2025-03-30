@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Header } from "./_components/main/header";
+import { Header } from "./_components/base-header";
 import { Nunito } from "next/font/google";
 
 export const metadata: Metadata = {
@@ -21,9 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={nunito.className}>
       <body className={`antialiased`}>
-        <main className="bg-gray-100 h-full">
+        <main className="bg-gray-100 h-screen">
           <Header />
-          {children}
+          <div className="bg-gray-100 w-full">{children}</div>
         </main>
       </body>
     </html>

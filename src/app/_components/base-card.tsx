@@ -10,7 +10,7 @@ interface BaseCardProps {
 export const BaseCard = ({ title, country_flag }: BaseCardProps) => {
   return (
     <Link
-      href={title.toLowerCase()}
+      href={`/country/${title.toLowerCase()}`}
       className="p-2 flex flex-col gap-3 bg-white rounded-2xl shadow hover:opacity-70 transition-all"
     >
       <Image

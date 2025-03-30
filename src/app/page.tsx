@@ -1,5 +1,5 @@
 import { fetchCountrys } from "./_actions/fetch-countrys";
-import { BaseCard } from "./_components/card/base-card";
+import { BaseCard } from "./_components/base-card";
 
 export default async function Home() {
   const countrys = await fetchCountrys();
