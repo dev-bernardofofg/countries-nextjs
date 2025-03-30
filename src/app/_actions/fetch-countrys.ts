@@ -16,7 +16,7 @@ export async function fetchCountrys(): Promise<fetchCountrysResponse[]> {
   });
 
   if (!response.ok) {
-    throw new Error("Failed to fetch posts");
+    throw new Error("Failed to fetch countrys");
   }
 
   const countrys = await response.json();
