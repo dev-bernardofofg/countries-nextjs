@@ -21,14 +21,18 @@ type fetchCountryByNameResponse = {
 export async function fetchCountryByName(
   name: string
 ): Promise<fetchCountryByNameResponse> {
-  const response = await fetch(`https://restcountries.com/v3.1/name/${name}`, {
-    next: { revalidate: EXPIRED_IN_ONE_HOUR },
-  });
+  const response = await fetch(
+    `https://restcountries.com/v3.1/name/${name}?fullText=true`,
+    {
+      next: { revalidate: EXPIRED_IN_ONE_HOUR },
+    }
+  );
 
   if (!response.ok) {
     throw new Error("Failed to fetch country");
   }
 
   const country = await response.json();
+
   return country[0];
 }

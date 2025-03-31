@@ -35,10 +35,12 @@ export const BaseList = ({
         {icon && <Image src={icon} alt="icon-list" width={16} height={16} />}
         <SpanTypography text={`${title}:`} className="font-bold" />
         {variant === "default" && <SpanTypography text={displayValue} />}
-        {variant === "badge" &&
-          Object.entries(value).map(([key, val]) => (
-            <Badge key={key}>{val}</Badge>
-          ))}
+        <div className="flex gap-1">
+          {variant === "badge" &&
+            Object.entries(value).map(([key, val]) => (
+              <Badge key={key}>{val}</Badge>
+            ))}
+        </div>
       </div>
     </div>
   );

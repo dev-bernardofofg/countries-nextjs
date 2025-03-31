@@ -20,5 +20,6 @@ export async function fetchCountrys(): Promise<fetchCountrysResponse[]> {
   }
 
   const countrys = await response.json();
+
   return countrys;
 }

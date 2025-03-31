@@ -1,4 +1,9 @@
+import {
+  fetchBorderCountryByCode,
+  fetchBorderCountryByCodeResponse,
+} from "@/app/_actions/fetch-border-country-by-code";
 import { fetchCountryByName } from "@/app/_actions/fetch-country-by-name";
+import { BaseCard } from "@/app/_components/base-card";
 import { BaseList } from "@/app/_components/base-list";
 import {
   LinkTypography,
@@ -16,8 +21,19 @@ export default async function Page({
   const { name } = await params;
   const country = await fetchCountryByName(name);
 
+  let borderCountries: fetchBorderCountryByCodeResponse[] = [];
+  if (country.borders) {
+    borderCountries = (
+      await Promise.all(
+        country.borders.map((borderCode: string) =>
+          fetchBorderCountryByCode(borderCode)
+        )
+      )
+    ).flat();
+  }
+
   return (
-    <div className="h-[calc(100vh-104px)] flex flex-col py-16 max-w-7xl mx-auto space-y-3">
+    <div className="h-full flex flex-col py-16 max-w-7xl mx-auto space-y-3">
       <div className="flex items-center justify-center">
         <TitleTypography text={country.name.common} />
       </div>
@@ -45,14 +61,26 @@ export default async function Page({
             alt={country.flags.alt ?? "flag-country"}
             width={458}
             height={275}
-            className="rounded-3xl shadow"
+            className="rounded-3xl shadow max-h-64 object-cover"
           />
         </div>
       </div>
 
       <div className="flex flex-col gap-3">
         <TitleTypography className="text-3xl" text="Bordering countries" />
-        {JSON.stringify(country.borders)}
+        {borderCountries.length > 0 ? (
+          <div className="grid grid-cols-5 gap-3">
+            {borderCountries.map((border) => (
+              <BaseCard
+                key={border.name.common}
+                title={border.name.common}
+                country_flag={border.flags.svg}
+              />
+            ))}
+          </div>
+        ) : (
+          <SpanTypography text="Not found borders" />
+        )}
       </div>
     </div>
   );
