@@ -17,9 +17,6 @@ export async function fetchBorderCountryByCode(
     next: { revalidate: EXPIRED_IN_ONE_HOUR },
   });
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch border country");
-  }
   const borderCountrys = await response.json();
 
   return borderCountrys;

@@ -28,10 +28,6 @@ export async function fetchCountryByName(
     }
   );
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch country");
-  }
-
   const country = await response.json();
 
   return country[0];
