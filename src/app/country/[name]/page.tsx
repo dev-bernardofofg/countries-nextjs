@@ -10,8 +10,10 @@ import {
   SpanTypography,
   TitleTypography,
 } from "@/app/_components/base-typography";
+import { formatterNumber } from "@/app/_utils/formatters";
 import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
+import Error from "./error";
 
 export default async function Page({
   params,
@@ -22,7 +24,12 @@ export default async function Page({
   const country = await fetchCountryByName(name);
 
   let borderCountries: fetchBorderCountryByCodeResponse[] = [];
-  if (country.borders) {
+
+  if (!country) {
+    return <Error />
+  }
+
+  if (country?.borders && Array.isArray(country.borders) && country.borders.length > 0) {
     borderCountries = (
       await Promise.all(
         country.borders.map((borderCode: string) =>
@@ -58,7 +65,7 @@ export default async function Page({
         <div className="flex flex-col gap-1 base:order-2 md:order-1">
           <BaseList title="Capital" value={country.capital} />
           <BaseList title="Continent" value={country.continents} />
-          <BaseList title="Population" value={String(country.population)} />
+          <BaseList title="Population" value={formatterNumber.format(country.population)} />
           <BaseList
             title="Spoken languages"
             value={country.languages}
